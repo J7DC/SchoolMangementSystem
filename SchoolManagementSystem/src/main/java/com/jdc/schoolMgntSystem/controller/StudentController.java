@@ -3,6 +3,7 @@ package com.jdc.schoolMgntSystem.controller;
 import javax.net.ssl.SSLEngineResult.Status;
 import javax.servlet.http.HttpServletRequest;
 
+import jdk.jpackage.internal.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -37,29 +38,29 @@ public class StudentController {
 		return new StudentProfile();
 	}
 
-	
+
 	@GetMapping("/getStudent")
 	public String showStudentProfile(HttpServletRequest request) {
 		request.setAttribute("student",studentRepo.findById(4l) );
+		Log.info("setting attributes");
 		return "student";
 	}
-	
+
 	@PostMapping("/createStudent")
 	public String saveStudentProfile(@ModelAttribute("student") StudentProfile student) throws ResourceNotFoundException {
-		 studentService.saveStudent(student);
-		 return "Student saved";
+		studentService.saveStudent(student);
+		return "Student saved";
 	}
-	
+
 	@PutMapping(value ="/editStudent",produces = { "application/json;charset=UTF-8" },consumes = {
-	"application/json" })
+			"application/json" })
 	public ResponseEntity<String> editStudent(@RequestParam String userId,@RequestBody StudentProfileDto  studentbody ) throws Exception{
-		
+
 		studentService.editStudent(userId,studentbody);
 		System.out.println("Student updated");
 		return new ResponseEntity<>(HttpStatus.OK);
-	
+
 	}
-	
 
 
 }
