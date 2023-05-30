@@ -14,6 +14,7 @@ public class SchoolMgntSystemController {
 	   public String get(){
 		   return "welcome";
 	   }
+
 	   
 	 
 }
