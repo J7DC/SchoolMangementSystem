@@ -1,15 +1,12 @@
 package com.jdc.schoolMgntSystem.serviceImpl;
 
-import java.util.Optional;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jdc.schoolMgntSystem.dao.StudentRepository;
-import com.jdc.schoolMgntSystem.exception.BusinessErrorCode;
 import com.jdc.schoolMgntSystem.exception.BusinessException;
 import com.jdc.schoolMgntSystem.model.StudentProfile;
 import com.jdc.schoolMgntSystem.model.StudentProfileDto;
@@ -33,7 +30,7 @@ public class StudentServiceimpl implements IStudentService {
 	}
 	
 	@Override
-	public void  editStudent(String userId,StudentProfileDto student) throws BusinessException, ObjectNotFoundException{
+	public void  updateStudent(String userId,StudentProfileDto student) throws BusinessException, ObjectNotFoundException{
 		if(userId != null){
 		StudentProfile newStudent = findStudentByuserId(userId);
 
@@ -61,9 +58,13 @@ public class StudentServiceimpl implements IStudentService {
 		{
 			return newStudent;
 		} else {
-			log.info("Either noification id not present or is Deleted");
+			log.info("Either notification id not present or is Deleted");
 			throw new ObjectNotFoundException("Requested Object not available in the system");
 		}
+	}
+
+	public StudentProfile getStudentById(long id) {
+		return studentRepo.findById(id).orElse(null);
 	}
 
 	}

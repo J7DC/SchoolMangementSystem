@@ -1,0 +1,164 @@
+{
+	"info": {
+		"_postman_id": "0f7ac88d-2911-4317-b2ce-a42df0f1f183",
+		"name": "School Managment System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3143591"
+	},
+	"item": [
+		{
+			"name": "welcome",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "students",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "users",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "create student",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"rollNumber\": \"012\",\r\n    \"firstName\": \"test3\",\r\n    \"lastName\": \"Alam\",\r\n    \"fatherName\": \"Alam\",\r\n    \"address\": \"10/4 , Street\",\r\n    \"age\": 22,\r\n    \"sex\": \"M\",\r\n    \"image\": \"image2\",\r\n    \"email\": \"sample@gmail.com\",\r\n    \"contactNumber\": \"9987654321\",\r\n    \"userId\": \"user12\"\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/student/addStudent",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"student",
+						"addStudent"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update students",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"rollNumber\": \"03\",\r\n    \"firstName\": \"test2\",\r\n    \"lastName\": \"Alam\",\r\n    \"fatherName\": \"Alam\",\r\n    \"address\": \"10/4 , Street\",\r\n    \"age\": 22,\r\n    \"sex\": \"M\",\r\n    \"image\": \"image2\",\r\n    \"email\": \"sample@gmail.com\",\r\n    \"contactNumber\": \"9987654321\",\r\n    \"userId\": \"user3\"\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/student/updateStudent?userId=user3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"student",
+						"updateStudent"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "user3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "registration",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"Shaan\",\r\n    \"lastName\": \"Alam\",\r\n    \"userId\": \"Alam\",\r\n    \"password\": \"java123\",\r\n    \"confirmPassword\": \"java123\"\r\n   \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/registration/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"registration",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userName\": \"Alam\",\r\n    \"password\": \"java123\",\r\n    \"role\": \"student\" \r\n   \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/login/userlogin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login",
+						"userlogin"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
