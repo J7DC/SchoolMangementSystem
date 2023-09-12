@@ -11,6 +11,7 @@ import javassist.tools.rmi.ObjectNotFoundException;
 public interface IStudentService {
 	
 	public void saveStudent(StudentProfile student);
-	public void editStudent(String userId,StudentProfileDto studentbody) throws BusinessException,ObjectNotFoundException;
+	public void updateStudent(String userId,StudentProfileDto student) throws BusinessException,ObjectNotFoundException;
+	public StudentProfile getStudentById(long id);
 
-}
+	}

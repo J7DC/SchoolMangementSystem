@@ -1,21 +1,20 @@
 package com.jdc.schoolMgntSystem.serviceImpl;
 
-import com.jdc.schoolMgntSystem.model.Registration;
 import com.jdc.schoolMgntSystem.model.User;
 
 public class UserMapper {
 	
-	public User map(Registration registration) {
+	public User map(User users) {
 		
 		User user = new User();
 		//user.setAge(registration.getAge());
-		user.setDate(registration.getDate());
+		/*user.setCreateDate(registration.getDate());
 		//user.setFirstName(registration.getFirstName());
 		//user.setLastName(registration.getLastName());
 		//user.setPlace(registration.getPlace());
 		user.setUserId(registration.getUserId());
 		user.setPassword(registration.getPassword());
-		user.setRole(registration.getRole());
+		user.setRole(registration.getRole());*/
 		return user;
 		
 	}

@@ -1,62 +1,49 @@
 package com.jdc.schoolMgntSystem.controller;
 
-import javax.net.ssl.SSLEngineResult.Status;
 import javax.servlet.http.HttpServletRequest;
 
-import jdk.jpackage.internal.Log;
+import com.jdc.schoolMgntSystem.SchoolMgntSystemApplication;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import com.jdc.schoolMgntSystem.dao.StudentRepository;
-import com.jdc.schoolMgntSystem.exception.BusinessException;
 import com.jdc.schoolMgntSystem.exception.ResourceNotFoundException;
 import com.jdc.schoolMgntSystem.model.StudentProfile;
 import com.jdc.schoolMgntSystem.model.StudentProfileDto;
 import com.jdc.schoolMgntSystem.service.IStudentService;
 
-@Controller
+
+@RestController
 @RequestMapping("/student")
 public class StudentController {
 
+	private static final Logger Log = LoggerFactory.getLogger(SchoolMgntSystemApplication.class);
+
 	@Autowired
 	private IStudentService studentService;
-	@Autowired
-	private StudentRepository studentRepo;
 
-	@ModelAttribute("student")
-	public StudentProfile studentLogin() {
-		return new StudentProfile();
-	}
-
-
-	@GetMapping("/getStudent")
-	public String showStudentProfile(HttpServletRequest request) {
-		request.setAttribute("student",studentRepo.findById(4l) );
+	@RequestMapping(value = "/getStudent/{id}", method = RequestMethod.GET)
+	public StudentProfile showStudentProfile(HttpServletRequest request, @PathVariable("id") long id) {
+		//request.setAttribute("student",studentRepo.findById(id) );
+		StudentProfile student= studentService.getStudentById(id);
 		Log.info("setting attributes");
-		return "student";
+		return student;
 	}
 
-	@PostMapping("/createStudent")
-	public String saveStudentProfile(@ModelAttribute("student") StudentProfile student) throws ResourceNotFoundException {
+	@RequestMapping(value="/addStudent", method=RequestMethod.POST)
+	public ResponseEntity<String>  saveStudentProfile(@RequestBody  StudentProfile student) throws ResourceNotFoundException {
 		studentService.saveStudent(student);
-		return "Student saved";
+		System.out.println("Student added");
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
-	@PutMapping(value ="/editStudent",produces = { "application/json;charset=UTF-8" },consumes = {
-			"application/json" })
-	public ResponseEntity<String> editStudent(@RequestParam String userId,@RequestBody StudentProfileDto  studentbody ) throws Exception{
+	@RequestMapping(value="/updateStudent", method=RequestMethod.PUT)
+	public ResponseEntity<String> updateStudent(@RequestParam String userId,@RequestBody StudentProfileDto  studentbody ) throws Exception{
 
-		studentService.editStudent(userId,studentbody);
+		studentService.updateStudent(userId,studentbody);
 		System.out.println("Student updated");
 		return new ResponseEntity<>(HttpStatus.OK);
 
